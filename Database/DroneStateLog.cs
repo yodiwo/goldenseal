@@ -24,13 +24,25 @@ namespace GoldenSealWebApi.Database
         public Route? Route { get; set; }
 
         [Column("battery")]
-        public float Battery { get; set; }
+        public float? Battery { get; set; }
 
-        [Column("velocity")]
-        public float Velocity { get; set; }
+        [Column("velocity_x")]
+        public float? VelocityX { get; set; }
 
-        [Column("geojson", TypeName = "varchar(500)")]
-        public string? GeoJSON { get; set; }
+        [Column("velocity_y")]
+        public float? VelocityY { get; set; }
+
+        [Column("velocity_z")]
+        public float? VelocityZ { get; set; }
+
+        [Column("altitude")]
+        public long? Altitude { get; set; }
+
+        [Column("longitude")]
+        public long? Longitude { get; set; }
+
+        [Column("latitude")]
+        public long? Latitude { get; set; }
 
         [Column("status")]
         public DroneStatus Status { get; set; }

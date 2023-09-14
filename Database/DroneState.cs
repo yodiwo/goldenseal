@@ -24,13 +24,25 @@ namespace GoldenSealWebApi.Database
         public Route? Route { get; set; }
 
         [Column("battery")]
-        public float Battery { get; set; }
+        public float? Battery { get; set; }
 
-        [Column("velocity")]
-        public float Velocity { get; set; }
+        [Column("velocity_x")]
+        public float? VelocityX { get; set; }
 
-        [Column("geojson", TypeName = "varchar(500)")]
-        public string? GeoJSON { get; set; }
+        [Column("velocity_y")]
+        public float? VelocityY { get; set; }
+
+        [Column("velocity_z")]
+        public float? VelocityZ { get; set; }
+
+        [Column("altitude")]
+        public long? Altitude { get; set; }
+
+        [Column("longitude")]
+        public long? Longitude { get; set; }
+
+        [Column("latitude")]
+        public long? Latitude { get; set; }
 
         [Column("status")]
         public DroneStatus Status { get; set; }
@@ -42,8 +54,14 @@ namespace GoldenSealWebApi.Database
 
     public enum DroneStatus
     {
-        Idle = 0,
-        InFlight,
-        UnderMaintenance
+        MAV_STATE_UNINIT, //Uninitialized system, state is unknown.
+        MAV_STATE_BOOT,  //System is booting up.
+        MAV_STATE_CALIBRATING, //System is calibrating and not flight-ready.
+        MAV_STATE_STANDBY, //System is grounded and on standby. It can be launched any time.
+        MAV_STATE_ACTIVE, //System is active and might be already airborne. Motors are engaged.
+        MAV_STATE_CRITICAL, //System is in a non-normal flight mode (failsafe). It can however still navigate.
+        MAV_STATE_EMERGENCY, //System is in a non-normal flight mode (failsafe). It lost control over parts or over the whole airframe. It is in mayday and going down.
+        MAV_STATE_POWEROFF, //System just initialized its power-down sequence, will shut down now.
+        MAV_STATE_FLIGHT_TERMINATION, //System is terminating itself (failsafe or commanded).
     }
 }

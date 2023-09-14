@@ -1,3 +1,4 @@
+using GoldenSealWebApi;
 using GoldenSealWebApi.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<DBContext>(opt => opt.UseMySql(dbConnectionString,
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHostedService<DroneMetadataRequesterService>();
 
 var app = builder.Build();
 

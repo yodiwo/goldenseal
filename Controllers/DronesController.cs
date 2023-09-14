@@ -21,19 +21,7 @@ namespace GoldenSealWebApi.Controllers
         [HttpGet]
         public async Task<IEnumerable<DroneViewDTO>> Get()
         {
-            return await _context.Drones
-                                 .Select(x => new DroneViewDTO
-                                 {
-                                     Id = x.Id,
-                                     Name = x.Name,
-                                     DockStation = new DockStationViewDTO
-                                     {
-                                         Id = x.DockStationId,
-                                         Name = x.DockStation.Name
-                                     },
-                                     CreatedTs = x.CreatedTs
-                                 })
-                                 .ToListAsync();
+            return await Libs.Drone.GetAsync(_context);
         }
 
         [HttpPost]
@@ -85,8 +73,12 @@ namespace GoldenSealWebApi.Controllers
                                          Name = x.Route.Name
                                      } : null,
                                      Battery = x.Battery,
-                                     Velocity = x.Velocity,
-                                     GeoJSON = x.GeoJSON,
+                                     VelocityX = x.VelocityX,
+                                     VelocityY = x.VelocityY,
+                                     VelocityZ = x.VelocityZ,
+                                     Altitude = x.Altitude,
+                                     Latitude = x.Latitude,
+                                     Longitude = x.Longitude,
                                      Status = x.Status
                                  })
                                  .SingleAsync();
@@ -95,43 +87,7 @@ namespace GoldenSealWebApi.Controllers
         [HttpPost("state")]
         public async Task<IActionResult> State(DroneStateCreateDTO req)
         {
-            var state = await _context.DroneStates.FirstOrDefaultAsync(x => x.DroneId == req.DroneId);
-            if (state == null)
-            {
-                await _context.DroneStates.AddAsync(new DroneState
-                {
-                    DroneId = req.DroneId,
-                    PilotId = req.PilotId,
-                    RouteId = req.RouteId,
-                    Battery = req.Battery,
-                    GeoJSON = req.GeoJSON,
-                    Status = req.Status
-                });
-            }
-            else
-            {
-                state.PilotId = req.PilotId;
-                state.RouteId = req.RouteId;
-                state.Battery = req.Battery;
-                state.Velocity = req.Velocity;
-                state.GeoJSON = req.GeoJSON;
-                state.Status = req.Status;
-
-                _context.DroneStates.Update(state);
-            }
-
-            await _context.DroneStateLogs.AddAsync(new DroneStateLog
-            {
-                DroneId = req.DroneId,
-                PilotId = req.PilotId,
-                RouteId = req.RouteId,
-                Battery = req.Battery,
-                Velocity = req.Velocity,
-                GeoJSON = req.GeoJSON,
-                Status = req.Status
-            });
-
-            await _context.SaveChangesAsync();
+            await Libs.Drone.PostStateAsync(_context, req);
 
             return Ok();
         }

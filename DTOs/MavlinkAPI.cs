@@ -2,6 +2,23 @@
 
 namespace GoldenSealWebApi.DTOs
 {
+    public class DefaultResponse
+    {
+        public Dictionary<string, Vehicle> vehicles { get; set; }
+    }
+
+    public class Vehicle
+    {
+        public int id { get; set; }
+        public Dictionary<string, Component> components { get; set; }
+    }
+
+    public class Component
+    {
+        public int id { get; set; }
+        public MavlinkMessages messages { get; set; }
+    }
+
     public class MavlinkMessages
     {
         [JsonProperty("PARAM_VALUE", NullValueHandling = NullValueHandling.Ignore)]

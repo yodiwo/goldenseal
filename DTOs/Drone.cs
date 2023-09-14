@@ -26,9 +26,13 @@ namespace GoldenSealWebApi.DTOs
         public int DroneId { get; set; }
         public int? PilotId { get; set; }
         public int? RouteId { get; set; }
-        public float Battery { get; set; }
-        public float Velocity { get; set; }
-        public string? GeoJSON { get; set; }
+        public float? Battery { get; set; }
+        public float? VelocityX { get; set; }
+        public float? VelocityY { get; set; }
+        public float? VelocityZ { get; set; }
+        public long? Altitude { get; set; }
+        public long? Longitude { get; set; }
+        public long? Latitude { get; set; }
         public DroneStatus Status { get; set; }
     }
 
@@ -37,9 +41,13 @@ namespace GoldenSealWebApi.DTOs
         public DroneViewDTO Drone { get; set; }
         public UserViewDTO Pilot { get; set; }
         public RouteViewDTO Route { get; set; }
-        public float Battery { get; set; }
-        public float Velocity { get; set; }
-        public string? GeoJSON { get; set; }
+        public float? Battery { get; set; }
+        public float? VelocityX { get; set; }
+        public float? VelocityY { get; set; }
+        public float? VelocityZ { get; set; }
+        public long? Altitude { get; set; }
+        public long? Longitude { get; set; }
+        public long? Latitude { get; set; }
         public DroneStatus Status { get; set; }
     }
 

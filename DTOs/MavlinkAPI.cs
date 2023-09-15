@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoldenSealWebApi.DTOs
+namespace GoldenSealWebApi.DTOs.MavlinkAPI
 {
-    public class DefaultResponse
+    public class Response
     {
         public Dictionary<string, Vehicle> vehicles { get; set; }
     }

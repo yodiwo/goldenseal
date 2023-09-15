@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHostedService<DroneMetadataRequesterService>();
+builder.Services.AddHostedService<GroundWasteSensorDataRequesterService>();
 
 var app = builder.Build();
 

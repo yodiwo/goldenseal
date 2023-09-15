@@ -41,10 +41,7 @@ namespace GoldenSealWebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var entry = await _context.Drones.SingleAsync(s => s.Id == id);
-
-            _context.Drones.Remove(entry);
-            await _context.SaveChangesAsync();
+            await Libs.Drone.DeleteAsync(_context, id);
 
             return Ok();
         }
@@ -52,36 +49,7 @@ namespace GoldenSealWebApi.Controllers
         [HttpGet("state")]
         public async Task<DroneStateViewDTO> State(int id)
         {
-            return await _context.DroneStates
-                                 .Where(x => x.DroneId == id)
-                                 .Select(x => new DroneStateViewDTO
-                                 {
-                                     Drone = new DroneViewDTO
-                                     {
-                                         Id = x.DroneId,
-                                         Name = x.Drone.Name
-                                     },
-                                     Pilot = x.Pilot != null ? new UserViewDTO
-                                     {
-                                         Id = (int)x.PilotId,
-                                         Name = x.Pilot.Name,
-                                         Email = x.Pilot.Email
-                                     } : null,
-                                     Route = x.Route != null ? new RouteViewDTO
-                                     {
-                                         Id = (int)x.RouteId,
-                                         Name = x.Route.Name
-                                     } : null,
-                                     Battery = x.Battery,
-                                     VelocityX = x.VelocityX,
-                                     VelocityY = x.VelocityY,
-                                     VelocityZ = x.VelocityZ,
-                                     Altitude = x.Altitude,
-                                     Latitude = x.Latitude,
-                                     Longitude = x.Longitude,
-                                     Status = x.Status
-                                 })
-                                 .SingleAsync();
+            return await Libs.Drone.GetStateAsync(_context, id);
         }
 
         [HttpPost("state")]

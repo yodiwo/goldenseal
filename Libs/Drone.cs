@@ -1,5 +1,6 @@
 ﻿using GoldenSealWebApi.Database;
 using GoldenSealWebApi.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSealWebApi.Libs
@@ -73,6 +74,46 @@ namespace GoldenSealWebApi.Libs
                                     CreatedTs = x.CreatedTs
                                 })
                                 .ToListAsync();
+        }
+        public static async Task<DroneStateViewDTO> GetStateAsync(DBContext context, int id)
+        {
+            return await context.DroneStates
+                                     .Where(x => x.DroneId == id)
+                                     .Select(x => new DroneStateViewDTO
+                                     {
+                                         Drone = new DroneViewDTO
+                                         {
+                                             Id = x.DroneId,
+                                             Name = x.Drone.Name
+                                         },
+                                         Pilot = x.Pilot != null ? new UserViewDTO
+                                         {
+                                             Id = (int)x.PilotId,
+                                             Name = x.Pilot.Name,
+                                             Email = x.Pilot.Email
+                                         } : null,
+                                         Route = x.Route != null ? new RouteViewDTO
+                                         {
+                                             Id = (int)x.RouteId,
+                                             Name = x.Route.Name
+                                         } : null,
+                                         Battery = x.Battery,
+                                         VelocityX = x.VelocityX,
+                                         VelocityY = x.VelocityY,
+                                         VelocityZ = x.VelocityZ,
+                                         Altitude = x.Altitude,
+                                         Latitude = x.Latitude,
+                                         Longitude = x.Longitude,
+                                         Status = x.Status
+                                     })
+                                     .SingleAsync();
+        }
+        public static async Task DeleteAsync(DBContext context, int id)
+        {
+            var entry = await context.Drones.SingleAsync(s => s.Id == id);
+
+            context.Drones.Remove(entry);
+            await context.SaveChangesAsync();
         }
     }
 }

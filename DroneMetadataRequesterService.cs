@@ -1,5 +1,6 @@
 ﻿using GoldenSealWebApi.DTOs;
 using GoldenSealWebApi.Database;
+using GoldenSealWebApi.DTOs.MavlinkAPI;
 
 namespace GoldenSealWebApi
 {
@@ -36,8 +37,7 @@ namespace GoldenSealWebApi
                 HttpResponseMessage response = client.GetAsync(URL).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    DefaultResponse rsp = null;
-                    rsp = response.Content.ReadFromJsonAsync<DefaultResponse>().GetAwaiter().GetResult();
+                    Response rsp = response.Content.ReadFromJsonAsync<Response>().GetAwaiter().GetResult();
 
                     if (rsp != null)
                     {
@@ -46,39 +46,48 @@ namespace GoldenSealWebApi
                             var _context = scope.ServiceProvider.GetRequiredService<DBContext>();
 
                             // keep only the drones that are registered
-                            var drones = Libs.Drone.GetAsync(_context).GetAwaiter().GetResult()?.Select(drone => drone.Id).ToList();
-                            var vehicles = rsp.vehicles
-                                              .Where(v => drones.Contains(v.Value.id))
-                                              .ToDictionary(v => v.Key, v => v.Value);
+                            var validDroneIds = Libs.Drone
+                                                    .GetAsync(_context)
+                                                    .GetAwaiter()
+                                                    .GetResult()
+                                                    .Select(drone => drone.Id)
+                                                    .ToList();
 
-                            // build models for creation
-                            var reqs = vehicles.Select(vehicle =>
+                            if (validDroneIds != null)
                             {
-                                var messages = vehicle.Value.components.Values.Select(comp => comp.messages);
+                                var vehicles = rsp.vehicles
+                                                  .Where(v => validDroneIds.Contains(v.Value.id))
+                                                  .ToDictionary(v => v.Key, v => v.Value);
 
-                                var status = DroneStatus.MAV_STATE_UNINIT;
-
-                                var statusTypeStr = messages.Select(msg => msg.SysStatus?.Message?.Type).FirstOrDefault(v => v != null);
-                                if (statusTypeStr != null)
-                                    Enum.TryParse(statusTypeStr, out status);
-
-                                return new DroneStateCreateDTO
+                                // build models for creation
+                                var reqs = vehicles.Select(vehicle =>
                                 {
-                                    DroneId = vehicle.Value.id,
-                                    Battery = messages.Select(msg => msg.BatteryStatus?.Message?.BatteryRemaining).FirstOrDefault(v => v != null),
-                                    VelocityX = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vx).FirstOrDefault(v => v != null),
-                                    VelocityY = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vy).FirstOrDefault(v => v != null),
-                                    VelocityZ = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vz).FirstOrDefault(v => v != null),
-                                    Altitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Alt).FirstOrDefault(v => v != null),
-                                    Longitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Lon).FirstOrDefault(v => v != null),
-                                    Latitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Lat).FirstOrDefault(v => v != null),
-                                    Status = status,
-                                };
-                            });
+                                    var messages = vehicle.Value.components.Values.Select(comp => comp.messages);
 
-                            // store
-                            foreach (var req in reqs)
-                                Libs.Drone.PostStateAsync(_context, req).GetAwaiter().GetResult();
+                                    var status = DroneStatus.MAV_STATE_UNINIT;
+
+                                    var statusTypeStr = messages.Select(msg => msg.SysStatus?.Message?.Type).FirstOrDefault(v => v != null);
+                                    if (statusTypeStr != null)
+                                        Enum.TryParse(statusTypeStr, out status);
+
+                                    return new DroneStateCreateDTO
+                                    {
+                                        DroneId = vehicle.Value.id,
+                                        Battery = messages.Select(msg => msg.BatteryStatus?.Message?.BatteryRemaining).FirstOrDefault(v => v != null),
+                                        VelocityX = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vx).FirstOrDefault(v => v != null),
+                                        VelocityY = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vy).FirstOrDefault(v => v != null),
+                                        VelocityZ = messages.Select(msg => msg.GlobalPositionInt?.Message?.Vz).FirstOrDefault(v => v != null),
+                                        Altitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Alt).FirstOrDefault(v => v != null),
+                                        Longitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Lon).FirstOrDefault(v => v != null),
+                                        Latitude = messages.Select(msg => msg.GlobalPositionInt?.Message?.Lat).FirstOrDefault(v => v != null),
+                                        Status = status
+                                    };
+                                });
+
+                                // store
+                                foreach (var req in reqs)
+                                    Libs.Drone.PostStateAsync(_context, req).GetAwaiter().GetResult();
+                            }
                         }
                     }
                 }

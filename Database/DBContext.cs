@@ -11,11 +11,14 @@ namespace GoldenSealWebApi.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<DockStation> DockStations { get; set; }
-        public DbSet<Drone> Drones { get; set; }
         public DbSet<Route> Routes { get; set; }
+        public DbSet<Drone> Drones { get; set; }
         public DbSet<DroneState> DroneStates { get; set; }
         public DbSet<DroneStateLog> DroneStateLogs { get; set; }
         public DbSet<DroneDetectedWasteLog> DroneDetectedWastes { get; set; }
+        public DbSet<GroundWasteSensor> GroundWasteSensors { get; set; }
+        public DbSet<GroundWasteSensorState> GroundWasteSensorStates { get; set; }
+        public DbSet<GroundWasteSensorStateLog> GroundWasteSensorStateLogs { get; set; }
         #endregion
 
         // The following configures EF to create a Sqlite database file in the
@@ -51,6 +54,9 @@ namespace GoldenSealWebApi.Database
                    .IsUnique();
             builder.Entity<Route>()
                    .HasIndex(u => u.Name)
+                   .IsUnique();
+            builder.Entity<GroundWasteSensor>()
+                   .HasIndex(u => u.RefId)
                    .IsUnique();
         }
     }

@@ -1,5 +1,6 @@
 using GoldenSealWebApi;
 using GoldenSealWebApi.Database;
+using GoldenSealWebApi.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHostedService<DroneMetadataRequesterService>();
 builder.Services.AddHostedService<GroundWasteSensorDataRequesterService>();
 
+builder.Services.AddTransient<IApiKeyValidator, ApiKeyValidator>();
+
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// middleware
+app.UseMiddleware<ApiKeyMiddleware>();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();

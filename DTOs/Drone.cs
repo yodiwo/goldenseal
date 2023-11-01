@@ -56,7 +56,9 @@ namespace GoldenSealWebApi.DTOs
         public int DroneId { get; set; }
         public WasteSize Size { get; set; }
         public WasteType Type { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
         public string? GeoJSON { get; set; }
+        public float? ConfidenceLevel { get; set; }
+        public int? Amount { get; set; }
     }
 }

@@ -69,7 +69,9 @@ namespace GoldenSealWebApi.Controllers
                 Size = req.Size,
                 Type = req.Type,
                 Image = req.Image,
-                GeoJSON = req.GeoJSON
+                GeoJSON = req.GeoJSON,
+                Amount = req.Amount,
+                ConfidenceLevel = req.ConfidenceLevel
             });
             await _context.SaveChangesAsync();
 

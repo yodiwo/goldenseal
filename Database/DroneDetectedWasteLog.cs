@@ -15,17 +15,23 @@ namespace GoldenSealWebApi.Database
         public int DroneId { get; set; }
         public Drone Drone { get; set; }
 
-        [Column("size")]
-        public WasteSize Size { get; set; }
-
         [Column("type")]
         public WasteType Type { get; set; }
 
+        [Column("confidence_level")]
+        public float? ConfidenceLevel { get; set; }
+
+        [Column("amount")]
+        public int? Amount { get; set; }
+
+        [Column("size")]
+        public WasteSize Size { get; set; }
+
         [Column("image", TypeName = "varchar(500)")]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [Column("geojson", TypeName = "varchar(500)")]
-        public string? GeoJSON { get; set; }
+        public string? GeoJSON { get; set; }        
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("ts", TypeName = "datetime")]
@@ -45,9 +51,10 @@ namespace GoldenSealWebApi.Database
     public enum WasteType
     {
         Unknown = 0,
-        Plastic = 0,
+        Plastic,
         Paper,
         Wood,
+        Aluminium,
         Metal,
         Glass,
         Organic

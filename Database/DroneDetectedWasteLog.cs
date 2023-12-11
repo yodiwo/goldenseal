@@ -30,8 +30,14 @@ namespace GoldenSealWebApi.Database
         [Column("image", TypeName = "varchar(500)")]
         public string? Image { get; set; }
 
+        [Column("georeferenced_image", TypeName = "varchar(500)")]
+        public string? GeoreferencedImage { get; set; }
+
         [Column("geojson", TypeName = "varchar(500)")]
-        public string? GeoJSON { get; set; }        
+        public string? GeoJSON { get; set; }
+
+        [Column("wms_service", TypeName = "varchar(500)")]
+        public string? WMSService { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("ts", TypeName = "datetime")]

@@ -63,16 +63,30 @@ namespace GoldenSealWebApi.Controllers
         [HttpPost("detected-waste")]
         public async Task<IActionResult> DetectedWaste(DroneDetectedWasteCreateDTO req)
         {
-            await _context.DroneDetectedWastes.AddAsync(new DroneDetectedWasteLog
+            var entries = new List<DroneDetectedWasteLog>();
+
+            foreach (var img in req.Images) 
             {
-                DroneId = req.DroneId,
-                Size = req.Size,
-                Type = req.Type,
-                Image = req.Image,
-                GeoJSON = req.GeoJSON,
-                Amount = req.Amount,
-                ConfidenceLevel = req.ConfidenceLevel
-            });
+                foreach (var feat in img.Features) 
+                {
+                    var entry = new DroneDetectedWasteLog
+                    {
+                        DroneId = req.DroneId,
+                        ConfidenceLevel = req.ConfidenceLevel,
+                        WMSService = req.WMSServiceUrl,
+                        Image = img.Url,
+                        GeoreferencedImage = img.GeoreferencedUrl,
+                        Size = feat.Size,
+                        Type = feat.Type,
+                        GeoJSON = feat.GeoJSON,
+                        Amount = feat.Amount                        
+                    };
+
+                    entries.Add(entry);
+                }
+            }
+
+            await _context.DroneDetectedWastes.AddRangeAsync(entries);
             await _context.SaveChangesAsync();
 
             return Ok();

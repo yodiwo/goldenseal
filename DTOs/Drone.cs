@@ -1,7 +1,5 @@
 using GoldenSealWebApi.Database;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace GoldenSealWebApi.DTOs
 {
@@ -54,11 +52,23 @@ namespace GoldenSealWebApi.DTOs
     public class DroneDetectedWasteCreateDTO
     {
         public int DroneId { get; set; }
+        public float? ConfidenceLevel { get; set; }
+        public string? WMSServiceUrl { get; set; }
+        public List<DroneDetectedWasteImageDTO> Images { get; set; }
+    }
+
+    public class DroneDetectedWasteImageDTO 
+    {
+        public string? Url { get; set; }
+        public string? GeoreferencedUrl { get; set; }
+        public List<DroneDetectedWasteImageDataDTO> Features { get; set; }
+    }
+
+    public class DroneDetectedWasteImageDataDTO
+    {
+        public string? GeoJSON { get; set; }
         public WasteSize Size { get; set; }
         public WasteType Type { get; set; }
-        public string? Image { get; set; }
-        public string? GeoJSON { get; set; }
-        public float? ConfidenceLevel { get; set; }
         public int? Amount { get; set; }
     }
 }

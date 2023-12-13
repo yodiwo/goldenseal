@@ -18,11 +18,8 @@ namespace GoldenSealWebApi.Database
         [Column("type")]
         public WasteType Type { get; set; }
 
-        [Column("confidence_level")]
-        public float? ConfidenceLevel { get; set; }
-
-        [Column("amount")]
-        public int? Amount { get; set; }
+        [Column("upload_confidence_level")]
+        public float? UploadConfidenceLevel { get; set; }
 
         [Column("size")]
         public WasteSize Size { get; set; }
@@ -33,11 +30,20 @@ namespace GoldenSealWebApi.Database
         [Column("georeferenced_image", TypeName = "varchar(500)")]
         public string? GeoreferencedImage { get; set; }
 
-        [Column("geojson", TypeName = "varchar(500)")]
-        public string? GeoJSON { get; set; }
+        [Column("bb_point_geojson", TypeName = "varchar(500)")]
+        public string? BBPointGeoJSON { get; set; }
+
+        [Column("bb_polygon_geojson", TypeName = "varchar(500)")]
+        public string? BBPolygonGeoJSON { get; set; }
 
         [Column("wms_service", TypeName = "varchar(500)")]
         public string? WMSService { get; set; }
+
+        [Column("cmlo_upload_id", TypeName = "int(11)")]
+        public int CMLOUploadId { get; set; }
+
+        [Column("confidence_level")]
+        public float? ConfidenceLevel { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("ts", TypeName = "datetime")]
@@ -57,12 +63,12 @@ namespace GoldenSealWebApi.Database
     public enum WasteType
     {
         Unknown = 0,
-        Plastic,
-        Paper,
-        Wood,
-        Aluminium,
-        Metal,
-        Glass,
-        Organic
+        Plastic = 1,
+        Paper = 2,
+        Metal = 3,
+        Cloth = 4,
+        GlassAndCeramic = 5,
+        Rubber = 6,
+        Wood = 7
     }
 }

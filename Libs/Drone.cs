@@ -1,6 +1,5 @@
 ﻿using GoldenSealWebApi.Database;
 using GoldenSealWebApi.DTOs;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSealWebApi.Libs
@@ -17,6 +16,7 @@ namespace GoldenSealWebApi.Libs
                     DroneId = req.DroneId,
                     PilotId = req.PilotId,
                     RouteId = req.RouteId,
+                    RegionId = req.RegionId,
                     Battery = req.Battery,
                     VelocityX = req.VelocityX,
                     VelocityY = req.VelocityY,
@@ -31,6 +31,7 @@ namespace GoldenSealWebApi.Libs
             {
                 state.PilotId = req.PilotId;
                 state.RouteId = req.RouteId;
+                state.RegionId = req.RegionId;
                 state.Battery = req.Battery;
                 state.VelocityX = req.VelocityX;
                 state.VelocityY = req.VelocityY;
@@ -48,6 +49,7 @@ namespace GoldenSealWebApi.Libs
                 DroneId = req.DroneId,
                 PilotId = req.PilotId,
                 RouteId = req.RouteId,
+                RegionId = req.RegionId,
                 VelocityX = req.VelocityX,
                 VelocityY = req.VelocityY,
                 VelocityZ = req.VelocityZ,
@@ -88,15 +90,20 @@ namespace GoldenSealWebApi.Libs
                                          },
                                          Pilot = x.Pilot != null ? new UserViewDTO
                                          {
-                                             Id = (int)x.PilotId,
+                                             Id = (int)x.PilotId!,
                                              Name = x.Pilot.Name,
                                              Email = x.Pilot.Email
-                                         } : null,
+                                         } : null!,
                                          Route = x.Route != null ? new RouteViewDTO
                                          {
-                                             Id = (int)x.RouteId,
+                                             Id = (int)x.RouteId!,
                                              Name = x.Route.Name
-                                         } : null,
+                                         } : null!,
+                                         Region = x.Region != null ? new RegionViewDTO
+                                         {
+                                             Id = (int)x.RegionId!,
+                                             Name = x.Region.Name
+                                         } : null!,
                                          Battery = x.Battery,
                                          VelocityX = x.VelocityX,
                                          VelocityY = x.VelocityY,

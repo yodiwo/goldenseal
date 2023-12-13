@@ -67,19 +67,21 @@ namespace GoldenSealWebApi.Controllers
 
             foreach (var img in req.Images) 
             {
-                foreach (var feat in img.Features) 
+                foreach (var feat in img.BoundingBoxes) 
                 {
                     var entry = new DroneDetectedWasteLog
                     {
+                        CMLOUploadId = req.CMLOUploadId,
                         DroneId = req.DroneId,
-                        ConfidenceLevel = req.ConfidenceLevel,
+                        UploadConfidenceLevel = req.UploadConfidenceLevel,
                         WMSService = req.WMSServiceUrl,
                         Image = img.Url,
                         GeoreferencedImage = img.GeoreferencedUrl,
-                        Size = feat.Size,
-                        Type = feat.Type,
-                        GeoJSON = feat.GeoJSON,
-                        Amount = feat.Amount                        
+                        Size = feat.WasteSize,
+                        Type = feat.WasteType,
+                        BBPointGeoJSON = feat.BBPointGeoJSON,
+                        BBPolygonGeoJSON = feat.BBPolygonGeoJSON,
+                        ConfidenceLevel = feat.ConfidenceLevel
                     };
 
                     entries.Add(entry);

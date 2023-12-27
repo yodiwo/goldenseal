@@ -25,7 +25,7 @@ namespace GoldenSealWebApi.Database
 
         [Column("region_id", TypeName = "int(11)")]
         public int? RegionId { get; set; }
-        public Route? Region { get; set; }
+        public Region? Region { get; set; }
 
         [Column("battery")]
         public float? Battery { get; set; }

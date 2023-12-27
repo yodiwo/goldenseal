@@ -45,6 +45,10 @@ namespace GoldenSealWebApi.Database
         [Column("confidence_level")]
         public float? ConfidenceLevel { get; set; }
 
+        [Column("region_id", TypeName = "int(11)")]
+        public int? RegionId { get; set; }
+        public Region Region { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("ts", TypeName = "datetime")]
         public DateTime Ts { get; set; }

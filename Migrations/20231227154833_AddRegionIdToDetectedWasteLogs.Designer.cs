@@ -3,6 +3,7 @@ using System;
 using GoldenSealWebApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoldenSealWebApi.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20231227154833_AddRegionIdToDetectedWasteLogs")]
+    partial class AddRegionIdToDetectedWasteLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,7 +120,7 @@ namespace GoldenSealWebApi.Migrations
                         .HasColumnType("varchar(500)")
                         .HasColumnName("image");
 
-                    b.Property<int?>("RegionId")
+                    b.Property<int>("RegionId")
                         .HasColumnType("int(11)")
                         .HasColumnName("region_id");
 
@@ -541,7 +544,9 @@ namespace GoldenSealWebApi.Migrations
 
                     b.HasOne("GoldenSealWebApi.Database.Region", "Region")
                         .WithMany()
-                        .HasForeignKey("RegionId");
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Drone");
 

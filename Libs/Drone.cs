@@ -61,6 +61,7 @@ namespace GoldenSealWebApi.Libs
 
             await context.SaveChangesAsync();
         }
+        
         public static async Task<List<DroneViewDTO>> GetAsync(DBContext context)
         {
             return await context.Drones
@@ -115,12 +116,45 @@ namespace GoldenSealWebApi.Libs
                                      })
                                      .SingleAsync();
         }
+       
         public static async Task DeleteAsync(DBContext context, int id)
         {
             var entry = await context.Drones.SingleAsync(s => s.Id == id);
 
             context.Drones.Remove(entry);
             await context.SaveChangesAsync();
+        }
+
+        public static async Task<List<DroneDetectedWasteLogViewDTO>> GetDetectedWasteAsync(DBContext context, DroneDetectedWasteLogsGetDTO req)
+        {
+            var query = context.DroneDetectedWastes
+                               .Where(x => req.FromDate <= x.Ts && req.ToDate >= x.Ts);
+
+            if (req.ConfidenceLevel is not null)
+                query = query.Where(x => x.ConfidenceLevel >= req.ConfidenceLevel);
+
+            if (req.WasteType is not null)
+                query = query.Where(x => x.Type == req.WasteType);
+
+            if (req.WasteSize is not null)
+                query = query.Where(x => x.Size == req.WasteSize);
+
+            return await query.Select(x => new DroneDetectedWasteLogViewDTO
+            {
+                Drone = new DroneViewDTO 
+                { 
+                    Id = x.Id,
+                    Name = x.Drone.Name,
+                },
+                Region = new RegionViewDTO
+                {
+                    Id = x.Id,
+                    Name = x.Region.Name
+                },
+                WasteSize = x.Size,
+                WasteType = x.Type,
+                ConfidenceLevel = x.ConfidenceLevel
+            }).ToListAsync();
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using GoldenSealWebApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoldenSealWebApi.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20231227155538_RemoveRegionIdToDetectedWasteLogs")]
+    partial class RemoveRegionIdToDetectedWasteLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,10 +120,6 @@ namespace GoldenSealWebApi.Migrations
                         .HasColumnType("varchar(500)")
                         .HasColumnName("image");
 
-                    b.Property<int?>("RegionId")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("region_id");
-
                     b.Property<int>("Size")
                         .HasColumnType("int")
                         .HasColumnName("size");
@@ -145,8 +144,6 @@ namespace GoldenSealWebApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DroneId");
-
-                    b.HasIndex("RegionId");
 
                     b.ToTable("DroneDetectedWasteLogs");
                 });
@@ -539,13 +536,7 @@ namespace GoldenSealWebApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GoldenSealWebApi.Database.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId");
-
                     b.Navigation("Drone");
-
-                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("GoldenSealWebApi.Database.DroneState", b =>

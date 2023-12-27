@@ -1,7 +1,6 @@
 using GoldenSealWebApi.Database;
 using GoldenSealWebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSealWebApi.Controllers
 {
@@ -63,6 +62,11 @@ namespace GoldenSealWebApi.Controllers
         [HttpPost("detected-waste")]
         public async Task<IActionResult> DetectedWaste(DroneDetectedWasteCreateDTO req)
         {
+            var droneState = await Libs.Drone.GetStateAsync(_context, req.DroneId);
+            var regionId = droneState?.Region?.Id;
+            if (regionId is null)
+                return BadRequest("The state of the provided drone is unknown");
+
             var entries = new List<DroneDetectedWasteLog>();
 
             foreach (var img in req.Images) 
@@ -92,6 +96,12 @@ namespace GoldenSealWebApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpGet("detected-wastes")]
+        public async Task<List<DroneDetectedWasteLogViewDTO>> DetectedWastes(DroneDetectedWasteLogsGetDTO req) 
+        {
+            return await Libs.Drone.GetDetectedWasteAsync(_context, req);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using GoldenSealWebApi.Database;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace GoldenSealWebApi.DTOs
 {
@@ -9,22 +9,22 @@ namespace GoldenSealWebApi.DTOs
         public string Name { get; set; }
         public DockStationViewDTO DockStation { get; set; }
         public string Image { get; set; }
-        public DateTime CreatedTs { get; set; }
+        public DateTime? CreatedTs { get; set; }
     }
 
     public class DroneCreateDTO
     {
-        public int DockStationId { get; set; }
-        public string Name { get; set; }
+        [Required] public int DockStationId { get; set; }
+        [Required] public string Name { get; set; }
         public string Image { get; set; }
     }
 
     public class DroneStateCreateDTO
     {
-        public int DroneId { get; set; }
+        [Required] public int DroneId { get; set; }
         public int? PilotId { get; set; }
         public int? RouteId { get; set; }
-        public int? RegionId { get; set; }
+        [Required] public int RegionId { get; set; }
         public float? Battery { get; set; }
         public float? VelocityX { get; set; }
         public float? VelocityY { get; set; }
@@ -53,11 +53,11 @@ namespace GoldenSealWebApi.DTOs
 
     public class DroneDetectedWasteCreateDTO
     {
-        public int DroneId { get; set; }
-        public int CMLOUploadId { get; set; }
+        [Required] public int DroneId { get; set; }
+        [Required] public int CMLOUploadId { get; set; }
         public float? UploadConfidenceLevel { get; set; }
         public string? WMSServiceUrl { get; set; }
-        public List<DroneDetectedWasteImageDTO> Images { get; set; }
+        [Required] public List<DroneDetectedWasteImageDTO> Images { get; set; }
     }
 
     public class DroneDetectedWasteImageDTO 
@@ -75,5 +75,23 @@ namespace GoldenSealWebApi.DTOs
         public WasteType WasteType { get; set; }
         public float? ConfidenceLevel { get; set; } // >= του "confidenceLevel" του upload
         public bool IsEligible { get; set; } // Αυτό δηλώνει αν το αντικείμενο που βρέθηκε βρίσκεται σε μη-επικαλυπτόμενο κομμάτι του μωσαϊκού
+    }
+
+    public class DroneDetectedWasteLogsGetDTO
+    {
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public float? ConfidenceLevel { get; set; }
+        public WasteSize? WasteSize { get; set; }
+        public WasteType? WasteType { get; set; }
+    }
+
+    public class DroneDetectedWasteLogViewDTO
+    {
+        public DroneViewDTO Drone { get; set; }
+        public RegionViewDTO Region { get; set; }
+        public WasteSize WasteSize { get; set; }
+        public WasteType WasteType { get; set; }
+        public float? ConfidenceLevel { get; set; }
     }
 }

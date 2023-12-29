@@ -146,11 +146,12 @@ namespace GoldenSealWebApi.Libs
                     Id = x.Id,
                     Name = x.Drone.Name,
                 },
-                Region = new RegionViewDTO
+                Region = x.RegionId != null ? 
+                new RegionViewDTO
                 {
-                    Id = x.Id,
+                    Id = (int)x.RegionId,
                     Name = x.Region.Name
-                },
+                } : null!,
                 WasteSize = x.Size,
                 WasteType = x.Type,
                 ConfidenceLevel = x.ConfidenceLevel

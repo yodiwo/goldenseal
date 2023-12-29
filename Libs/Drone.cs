@@ -143,7 +143,7 @@ namespace GoldenSealWebApi.Libs
             {
                 Drone = new DroneViewDTO 
                 { 
-                    Id = x.Id,
+                    Id = x.DroneId,
                     Name = x.Drone.Name,
                 },
                 Region = x.RegionId != null ? 

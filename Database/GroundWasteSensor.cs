@@ -18,6 +18,9 @@ namespace GoldenSealWebApi.Database
         public int RegionId { get; set; }
         public Region Region { get; set; }
 
+        [Column("geojson", TypeName = "varchar(500)")]
+        public string GeoJSON { get; set; }
+
         [Column("image", TypeName = "varchar(500)")]
         public string Image { get; set; }
 

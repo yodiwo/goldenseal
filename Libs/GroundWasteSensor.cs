@@ -45,7 +45,10 @@ namespace GoldenSealWebApi.Libs
                                         Id = x.RegionId,
                                         Name = x.Region.Name
                                     },
-                                    CreatedTs = x.CreatedTs
+                                    CreatedTs = x.CreatedTs,
+                                    GeoJSON = x.GeoJSON,
+                                    RefId = x.RefId,
+                                    Image = x.Image
                                 })
                                 .ToListAsync();
         }

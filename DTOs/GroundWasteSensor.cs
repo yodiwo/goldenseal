@@ -13,14 +13,16 @@ namespace GoldenSealWebApi.DTOs
         public string Image { get; set; }
         public string RefId { get; set; }
         public DateTime CreatedTs { get; set; }
+        public string? GeoJSON { get; set; }
     }
 
     public class GroundWasteSensorCreateDTO
     {
-        public int RegionId { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-        public string RefId { get; set; }
+        [Required] public int RegionId { get; set; }
+        [Required] public string Name { get; set; }
+        [Required] public string RefId { get; set; }
+        public string? Image { get; set; }
+        public string? GeoJSON { get; set; }
     }
 
     public class GroundWasteSensorStateCreateDTO

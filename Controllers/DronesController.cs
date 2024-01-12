@@ -1,6 +1,7 @@
 using GoldenSealWebApi.Database;
 using GoldenSealWebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace GoldenSealWebApi.Controllers
 {
@@ -73,6 +74,9 @@ namespace GoldenSealWebApi.Controllers
             {
                 foreach (var feat in img.BoundingBoxes) 
                 {
+                    var bbGeoJson = JsonSerializer.Deserialize<Libs.GeoJSON.Geometry>(feat.BBPolygonGeoJSON);
+                    var wasteArea = Libs.Converters.ToArea(bbGeoJson);
+
                     var entry = new DroneDetectedWasteLog
                     {
                         CMLOUploadId = req.CMLOUploadId,
@@ -82,6 +86,7 @@ namespace GoldenSealWebApi.Controllers
                         Image = img.Url,
                         GeoreferencedImage = img.GeoreferencedUrl,
                         Size = feat.WasteSize,
+                        Area = wasteArea,
                         Type = feat.WasteType,
                         BBPointGeoJSON = feat.BBPointGeoJSON,
                         BBPolygonGeoJSON = feat.BBPolygonGeoJSON,

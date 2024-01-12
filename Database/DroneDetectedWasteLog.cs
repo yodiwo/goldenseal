@@ -24,6 +24,9 @@ namespace GoldenSealWebApi.Database
         [Column("size")]
         public WasteSize Size { get; set; }
 
+        [Column("area")]
+        public float? Area { get; set; }
+
         [Column("image", TypeName = "varchar(500)")]
         public string? Image { get; set; }
 

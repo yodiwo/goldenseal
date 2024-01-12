@@ -2,6 +2,7 @@ using GoldenSealWebApi;
 using GoldenSealWebApi.Database;
 using GoldenSealWebApi.Middleware;
 using Microsoft.EntityFrameworkCore;
+using static GoldenSealWebApi.Middleware.ApiKeyMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,10 @@ builder.Services.AddDbContext<DBContext>(opt => opt.UseMySql(dbConnectionString,
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(config =>
+{
+    config.OperationFilter<MyHeaderFilter>();
+});
 
 builder.Services.AddHostedService<DroneStateRequesterService>();
 builder.Services.AddHostedService<GroundWasteSensorDataRequesterService>();

@@ -2,7 +2,7 @@
 
 namespace GoldenSealWebApi.Middleware;
 
-public class ApiKeyMiddleware
+public partial class ApiKeyMiddleware
 {
     public const string ApiKeyHeaderName = "x-api-Key";
 

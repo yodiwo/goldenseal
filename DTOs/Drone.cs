@@ -93,6 +93,8 @@ namespace GoldenSealWebApi.DTOs
         public float? ConfidenceLevel { get; set; }
         public WasteSize? WasteSize { get; set; }
         public WasteType? WasteType { get; set; }
+        public int? RegionId { get; set; }
+        public string? RegionName { get; set; }
     }
 
     public class DroneDetectedWasteLogViewDTO
@@ -101,6 +103,7 @@ namespace GoldenSealWebApi.DTOs
         public RegionViewDTO Region { get; set; }
         public WasteSize WasteSize { get; set; }
         public WasteType WasteType { get; set; }
+        public float? WasteArea { get; set; }
         public float? ConfidenceLevel { get; set; }
     }
 }

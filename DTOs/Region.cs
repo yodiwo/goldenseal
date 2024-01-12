@@ -7,6 +7,7 @@ namespace GoldenSealWebApi.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string GeoJSON { get; set; }
+        public float? Area { get; set; }
         public DateTime? CreatedTs { get; set; }
     }
 
@@ -15,5 +16,14 @@ namespace GoldenSealWebApi.DTOs
         [Required] public string Name { get; set; }
         [Required] public float Area { get; set; }
         public string GeoJSON { get; set; }
+    }
+
+    public class RegionMetricsViewDTO
+    {
+        public RegionViewDTO Region { get; set; }
+        public int? WastesNumber { get; set; }
+        public float? WastesArea { get; set; }
+        public float? WastesAreaCoveragePercentage => Region.Area > 0 ? 100 * WastesArea / Region.Area : null;
+        public float? WastesPer100SquareMeters => Region.Area > 0 ? 100 * WastesNumber / Region.Area : null;
     }
 }

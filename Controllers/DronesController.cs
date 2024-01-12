@@ -63,11 +63,7 @@ namespace GoldenSealWebApi.Controllers
         [HttpPost("detected-waste")]
         public async Task<IActionResult> DetectedWaste(DroneDetectedWasteCreateDTO req)
         {
-            var preflightConfig = await Libs.Drone.GetPreflightConfigAsync(_context, req.DroneId);
-            var regionId = preflightConfig?.Region?.Id;
-            if (regionId is null)
-                return BadRequest("No preflight configuration exists for the provided drone");
-
+            var regionId = await Libs.Drone.GetRegionAsync(_context, req.DroneId);            
             var entries = new List<DroneDetectedWasteLog>();
 
             foreach (var img in req.Images) 

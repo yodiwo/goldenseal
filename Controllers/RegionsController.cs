@@ -27,7 +27,8 @@ namespace GoldenSealWebApi.Controllers
                                      Id = x.Id,
                                      Name = x.Name,
                                      GeoJSON = x.GeoJSON,
-                                     CreatedTs = x.CreatedTs
+                                     CreatedTs = x.CreatedTs,
+                                     Area = x.Area
                                  })
                                  .ToListAsync();
         }
@@ -55,6 +56,21 @@ namespace GoldenSealWebApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpGet("metrics")]
+        public async Task<IEnumerable<RegionMetricsViewDTO>> Get([FromQuery] DroneDetectedWasteLogsGetDTO req)
+        {
+            var wastes = await Libs.Drone.GetDetectedWasteAsync(_context, req);
+
+            var wastesPerRegion = wastes.GroupBy(x => x.Region.Id);
+
+            return wastesPerRegion.Select(wastes => new RegionMetricsViewDTO
+            {
+                Region = wastes.First().Region,
+                WastesNumber = wastes.Count(),
+                WastesArea = wastes.Sum(y => y.WasteArea ?? 0)
+            }).ToList();
         }
     }
 }

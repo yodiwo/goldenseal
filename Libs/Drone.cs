@@ -122,7 +122,7 @@ namespace GoldenSealWebApi.Libs
                                          Region = x.Region != null ? new RegionViewDTO
                                          {
                                              Id = (int)x.RegionId!,
-                                             Name = x.Region.Name
+                                             Name = x.Region.Name                                             
                                          } : null!,
                                          Battery = x.Battery,
                                          VelocityX = x.VelocityX,
@@ -136,20 +136,12 @@ namespace GoldenSealWebApi.Libs
                                      .SingleAsync();
         }
 
-        public static async Task<DronePreflightConfigViewDTO> GetPreflightConfigAsync(DBContext context, int id)
+        public static async Task<int> GetRegionAsync(DBContext context, int id)
         {
             return await context.DronePreflightConfigs
-                                     .Where(x => x.DroneId == id)
-                                     .Select(x => new DronePreflightConfigViewDTO
-                                     {
-                                         Region = new RegionViewDTO
-                                         {
-                                             Id = x.RegionId,
-                                             Name = x.Region.Name
-                                         },
-                                         Altitude = x.Altitude
-                                     })
-                                     .SingleAsync();
+                                .Where(x => x.DroneId == id)
+                                .Select(x => x.RegionId)
+                                .SingleAsync();
         }
 
         public static async Task DeleteAsync(DBContext context, int id)
@@ -174,6 +166,12 @@ namespace GoldenSealWebApi.Libs
             if (req.WasteSize is not null)
                 query = query.Where(x => x.Size == req.WasteSize);
 
+            if (req.RegionId is not null)
+                query = query.Where(x => x.RegionId == req.RegionId);
+
+            if (req.RegionName is not null)
+                query = query.Where(x => x.Region.Name == req.RegionName);
+
             return await query.Select(x => new DroneDetectedWasteLogViewDTO
             {
                 Drone = new DroneViewDTO 
@@ -185,10 +183,12 @@ namespace GoldenSealWebApi.Libs
                 new RegionViewDTO
                 {
                     Id = (int)x.RegionId,
-                    Name = x.Region.Name
+                    Name = x.Region.Name,
+                    Area = x.Region.Area
                 } : null!,
                 WasteSize = x.Size,
                 WasteType = x.Type,
+                WasteArea = x.Area,
                 ConfidenceLevel = x.ConfidenceLevel
             }).ToListAsync();
         }

@@ -100,7 +100,7 @@ namespace GoldenSealWebApi.Controllers
         }
 
         [HttpGet("detected-wastes")]
-        public async Task<List<DroneDetectedWasteLogViewDTO>> DetectedWastes(DroneDetectedWasteLogsGetDTO req) 
+        public async Task<List<DroneDetectedWasteLogViewDTO>> DetectedWastes([FromQuery] DroneDetectedWasteLogsGetDTO req) 
         {
             return await Libs.Drone.GetDetectedWasteAsync(_context, req);
         }

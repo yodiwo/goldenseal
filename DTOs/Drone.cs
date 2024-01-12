@@ -89,8 +89,8 @@ namespace GoldenSealWebApi.DTOs
 
     public class DroneDetectedWasteLogsGetDTO
     {
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+        [Required] public DateTime FromDate { get; set; }
+        [Required] public DateTime ToDate { get; set; }
         public float? ConfidenceLevel { get; set; }
         public WasteSize? WasteSize { get; set; }
         public WasteType? WasteType { get; set; }

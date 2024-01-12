@@ -52,7 +52,7 @@ namespace GoldenSealWebApi.Libs
                                 })
                                 .ToListAsync();
         }
-        public static async Task<GroundWasteSensorStateViewDTO> GetStateAsync(DBContext context, int id, string refId)
+        public static async Task<GroundWasteSensorStateViewDTO> GetStateAsync(DBContext context, int? id, string? refId)
         {
             return await context.GroundWasteSensorStates
                                 .Where(x => x.GroundWasteSensorId == id || x.GroundWasteSensor.RefId == refId)

@@ -47,7 +47,7 @@ namespace GoldenSealWebApi.Controllers
         }
 
         [HttpGet("state")]
-        public async Task<GroundWasteSensorStateViewDTO> State(int id, string refId)
+        public async Task<GroundWasteSensorStateViewDTO> State(int? id, string? refId)
         {
             return await Libs.GroundWasteSensor.GetStateAsync(_context, id, refId);
         }

@@ -49,7 +49,6 @@ namespace GoldenSealWebApi.DTOs
     {
         public DroneViewDTO Drone { get; set; }
         public UserViewDTO Pilot { get; set; }
-        public RouteViewDTO Route { get; set; }
         public RegionViewDTO Region { get; set; }
         public float? Battery { get; set; }
         public float? VelocityX { get; set; }

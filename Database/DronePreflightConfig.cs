@@ -19,10 +19,6 @@ namespace GoldenSealWebApi.Database
         public int? PilotId { get; set; }
         public User? Pilot { get; set; }
 
-        [Column("route_id", TypeName = "int(11)")]
-        public int? RouteId { get; set; }
-        public Route? Route { get; set; }
-
         [Column("region_id", TypeName = "int(11)")]
         public int RegionId { get; set; }
         public Region Region { get; set; }

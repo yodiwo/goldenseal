@@ -41,7 +41,6 @@ namespace GoldenSealWebApi.Libs
                 {
                     DroneId = req.DroneId,
                     PilotId = preflightConfig.PilotId,
-                    RouteId = preflightConfig.RouteId,
                     RegionId = preflightConfig.RegionId,
                     Battery = req.Battery,
                     VelocityX = req.VelocityX,
@@ -56,7 +55,6 @@ namespace GoldenSealWebApi.Libs
             else
             {
                 state.PilotId = preflightConfig.PilotId;
-                state.RouteId = preflightConfig.RouteId;
                 state.RegionId = preflightConfig.RegionId;
                 state.Battery = req.Battery;
                 state.VelocityX = req.VelocityX;
@@ -74,7 +72,6 @@ namespace GoldenSealWebApi.Libs
             {
                 DroneId = req.DroneId,
                 PilotId = preflightConfig.PilotId,
-                RouteId = preflightConfig.RouteId,
                 RegionId = preflightConfig.RegionId,
                 VelocityX = req.VelocityX,
                 VelocityY = req.VelocityY,
@@ -121,11 +118,6 @@ namespace GoldenSealWebApi.Libs
                                              Id = (int)x.PilotId!,
                                              Name = x.Pilot.Name,
                                              Email = x.Pilot.Email
-                                         } : null!,
-                                         Route = x.Route != null ? new RouteViewDTO
-                                         {
-                                             Id = (int)x.RouteId!,
-                                             Name = x.Route.Name
                                          } : null!,
                                          Region = x.Region != null ? new RegionViewDTO
                                          {

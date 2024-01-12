@@ -1,7 +1,6 @@
 using GoldenSealWebApi.Database;
 using GoldenSealWebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldenSealWebApi.Controllers
 {
@@ -51,14 +50,6 @@ namespace GoldenSealWebApi.Controllers
         public async Task<GroundWasteSensorStateViewDTO> State(int id, string refId)
         {
             return await Libs.GroundWasteSensor.GetStateAsync(_context, id, refId);
-        }
-
-        [HttpPost("state")]
-        public async Task<IActionResult> State(GroundWasteSensorStateCreateDTO req)
-        {
-            await Libs.GroundWasteSensor.PostStateAsync(_context, req);
-
-            return Ok();
         }
     }
 }

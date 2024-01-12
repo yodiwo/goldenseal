@@ -14,6 +14,7 @@ namespace GoldenSealWebApi.Database
         public DbSet<Route> Routes { get; set; }
         public DbSet<Drone> Drones { get; set; }
         public DbSet<DroneState> DroneStates { get; set; }
+        public DbSet<DronePreflightConfig> DronePreflightConfigs { get; set; }
         public DbSet<DroneStateLog> DroneStateLogs { get; set; }
         public DbSet<DroneDetectedWasteLog> DroneDetectedWastes { get; set; }
         public DbSet<GroundWasteSensor> GroundWasteSensors { get; set; }
@@ -37,6 +38,9 @@ namespace GoldenSealWebApi.Database
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<DronePreflightConfig>()
+                   .HasIndex(u => u.DroneId)
+                   .IsUnique();
             builder.Entity<DroneState>()
                    .HasIndex(u => u.DroneId)
                    .IsUnique();

@@ -19,12 +19,22 @@ namespace GoldenSealWebApi.DTOs
         public string Image { get; set; }
     }
 
+    public class DronePrefllightConfigCreateDTO
+    {
+        [Required] public int DroneId { get; set; }
+        [Required] public int RegionId { get; set; }
+        public int? PilotId { get; set; }
+    }
+
+    public class DronePreflightConfigViewDTO 
+    {
+        public RegionViewDTO Region { get; set; }
+        public float? Altitude { get; set; }
+    }
+
     public class DroneStateCreateDTO
     {
         [Required] public int DroneId { get; set; }
-        public int? PilotId { get; set; }
-        public int? RouteId { get; set; }
-        [Required] public int RegionId { get; set; }
         public float? Battery { get; set; }
         public float? VelocityX { get; set; }
         public float? VelocityY { get; set; }

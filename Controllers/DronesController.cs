@@ -45,27 +45,27 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        [HttpPost("preflight-config")]
+        public async Task<IActionResult> PreflightConfig(DronePrefllightConfigCreateDTO req)
+        {
+            await Libs.Drone.PostPreflightConfigAsync(_context, req);
+
+            return Ok();
+        }
+
         [HttpGet("state")]
         public async Task<DroneStateViewDTO> State(int id)
         {
             return await Libs.Drone.GetStateAsync(_context, id);
         }
 
-        [HttpPost("state")]
-        public async Task<IActionResult> State(DroneStateCreateDTO req)
-        {
-            await Libs.Drone.PostStateAsync(_context, req);
-
-            return Ok();
-        }
-
         [HttpPost("detected-waste")]
         public async Task<IActionResult> DetectedWaste(DroneDetectedWasteCreateDTO req)
         {
-            var droneState = await Libs.Drone.GetStateAsync(_context, req.DroneId);
-            var regionId = droneState?.Region?.Id;
+            var preflightConfig = await Libs.Drone.GetPreflightConfigAsync(_context, req.DroneId);
+            var regionId = preflightConfig?.Region?.Id;
             if (regionId is null)
-                return BadRequest("The state of the provided drone is unknown");
+                return BadRequest("No preflight configuration exists for the provided drone");
 
             var entries = new List<DroneDetectedWasteLog>();
 
@@ -85,7 +85,8 @@ namespace GoldenSealWebApi.Controllers
                         Type = feat.WasteType,
                         BBPointGeoJSON = feat.BBPointGeoJSON,
                         BBPolygonGeoJSON = feat.BBPolygonGeoJSON,
-                        ConfidenceLevel = feat.ConfidenceLevel
+                        ConfidenceLevel = feat.ConfidenceLevel,
+                        RegionId = regionId
                     };
 
                     entries.Add(entry);

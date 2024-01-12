@@ -6,17 +6,43 @@ namespace GoldenSealWebApi.Libs
 {
     public class Drone
     {
+        public static async Task PostPreflightConfigAsync(DBContext context, DronePrefllightConfigCreateDTO req)
+        {
+            var preflightConfig = await context.DronePreflightConfigs.FirstOrDefaultAsync(x => x.DroneId == req.DroneId);
+            if (preflightConfig == null)
+            {
+                await context.DronePreflightConfigs.AddAsync(new DronePreflightConfig
+                {
+                    DroneId = req.DroneId,
+                    RegionId = req.RegionId,
+                    PilotId = req.PilotId
+                });
+            }
+            else
+            {
+                preflightConfig.PilotId = req.PilotId;
+                preflightConfig.RegionId = req.RegionId;
+
+                context.DronePreflightConfigs.Update(preflightConfig);
+            }
+
+            await context.SaveChangesAsync();
+        }
+
         public static async Task PostStateAsync(DBContext context, DroneStateCreateDTO req)
         {
             var state = await context.DroneStates.FirstOrDefaultAsync(x => x.DroneId == req.DroneId);
+            var preflightConfig = await context.DronePreflightConfigs.FirstOrDefaultAsync(x => x.DroneId == req.DroneId)
+                ?? throw new InvalidDataException($"There is no preflight configuration for the provided drone");
+
             if (state == null)
             {
                 await context.DroneStates.AddAsync(new DroneState
                 {
                     DroneId = req.DroneId,
-                    PilotId = req.PilotId,
-                    RouteId = req.RouteId,
-                    RegionId = req.RegionId,
+                    PilotId = preflightConfig.PilotId,
+                    RouteId = preflightConfig.RouteId,
+                    RegionId = preflightConfig.RegionId,
                     Battery = req.Battery,
                     VelocityX = req.VelocityX,
                     VelocityY = req.VelocityY,
@@ -29,9 +55,9 @@ namespace GoldenSealWebApi.Libs
             }
             else
             {
-                state.PilotId = req.PilotId;
-                state.RouteId = req.RouteId;
-                state.RegionId = req.RegionId;
+                state.PilotId = preflightConfig.PilotId;
+                state.RouteId = preflightConfig.RouteId;
+                state.RegionId = preflightConfig.RegionId;
                 state.Battery = req.Battery;
                 state.VelocityX = req.VelocityX;
                 state.VelocityY = req.VelocityY;
@@ -47,9 +73,9 @@ namespace GoldenSealWebApi.Libs
             await context.DroneStateLogs.AddAsync(new DroneStateLog
             {
                 DroneId = req.DroneId,
-                PilotId = req.PilotId,
-                RouteId = req.RouteId,
-                RegionId = req.RegionId,
+                PilotId = preflightConfig.PilotId,
+                RouteId = preflightConfig.RouteId,
+                RegionId = preflightConfig.RegionId,
                 VelocityX = req.VelocityX,
                 VelocityY = req.VelocityY,
                 VelocityZ = req.VelocityZ,
@@ -78,6 +104,7 @@ namespace GoldenSealWebApi.Libs
                                 })
                                 .ToListAsync();
         }
+
         public static async Task<DroneStateViewDTO> GetStateAsync(DBContext context, int id)
         {
             return await context.DroneStates
@@ -116,7 +143,23 @@ namespace GoldenSealWebApi.Libs
                                      })
                                      .SingleAsync();
         }
-       
+
+        public static async Task<DronePreflightConfigViewDTO> GetPreflightConfigAsync(DBContext context, int id)
+        {
+            return await context.DronePreflightConfigs
+                                     .Where(x => x.DroneId == id)
+                                     .Select(x => new DronePreflightConfigViewDTO
+                                     {
+                                         Region = new RegionViewDTO
+                                         {
+                                             Id = x.RegionId,
+                                             Name = x.Region.Name
+                                         },
+                                         Altitude = x.Altitude
+                                     })
+                                     .SingleAsync();
+        }
+
         public static async Task DeleteAsync(DBContext context, int id)
         {
             var entry = await context.Drones.SingleAsync(s => s.Id == id);

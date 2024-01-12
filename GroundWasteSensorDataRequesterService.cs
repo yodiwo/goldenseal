@@ -52,52 +52,51 @@ namespace GoldenSealWebApi
                                                         .GetResult()
                                                         .Where(sensor => sensor.RefId != null)
                                                         .ToDictionary(sensor => sensor.RefId, sensor => sensor.Id);
-                            if (validSensorRefIds != null)
+                            var sensorsData = rsp.data
+                                                 .all_fm_with_generated
+                                                 .Where(v => validSensorRefIds.Keys.Contains(v.id.ToString()))
+                                                 .ToList();
+
+                            // build models for creation
+                            var reqs = sensorsData.Select(datum =>
                             {
-                                var sensorsData = rsp.data
-                                                     .all_fm_with_generated
-                                                     .Where(v => validSensorRefIds.Keys.Contains(v.id.ToString()))
-                                                     .ToList();
-
-                                // build models for creation
-                                var reqs = sensorsData.Select(datum =>
+                                var massString = datum.total_generated;
+                                if (massString.Contains(" kg"))
                                 {
-                                    var massString = datum.total_generated;
-                                    if (massString.Contains(" kg"))
+                                    massString = massString
+                                                    .Replace(" kg", "") // remove units
+                                                    .Replace(".", "") // transform to valid format
+                                                    .Replace(",", ".");
+
+                                    if (float.TryParse(massString, out var mass))
                                     {
-                                        massString = massString
-                                                        .Replace(" kg", "") // remove units
-                                                        .Replace(".", "") // transform to valid format
-                                                        .Replace(",", ".");
-
-                                        if (float.TryParse(massString, out var mass))
+                                        return new GroundWasteSensorStateCreateDTO
                                         {
-                                            return new GroundWasteSensorStateCreateDTO
-                                            {
-                                                GroundWasteSensorId = validSensorRefIds[datum.id.ToString()],
-                                                MassKg = mass,
-                                                Rank = datum.rank
-                                            };
-                                        }
+                                            GroundWasteSensorId = validSensorRefIds[datum.id.ToString()],
+                                            MassKg = mass,
+                                            Rank = datum.rank // TODO: remove
+                                        };
                                     }
+                                }
 
-                                    return null;
-                                });
+                                return null;
+                            });
 
-                                // store
-                                foreach (var req in reqs.Where(r => r != null))
-                                    Libs.GroundWasteSensor.PostStateAsync(_context, req).GetAwaiter().GetResult();
+                            // store
+                            foreach (var req in reqs.Where(r => r != null))
+                            {
+                                Libs.GroundWasteSensor.PostStateAsync(_context, req).GetAwaiter().GetResult();
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex) { _logger.LogCritical("Unable to fetch Mavlink data", ex); }
+            catch (Exception ex) { _logger.LogCritical("Unable to fetch ground sensors data", ex); }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation($"{nameof(DroneMetadataRequesterService)} is stopping.");
+            _logger.LogInformation($"{nameof(GroundWasteSensorDataRequesterService)} is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

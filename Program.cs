@@ -16,7 +16,7 @@ builder.Services.AddDbContext<DBContext>(opt => opt.UseMySql(dbConnectionString,
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHostedService<DroneMetadataRequesterService>();
+builder.Services.AddHostedService<DroneStateRequesterService>();
 builder.Services.AddHostedService<GroundWasteSensorDataRequesterService>();
 
 builder.Services.AddTransient<IApiKeyValidator, ApiKeyValidator>();

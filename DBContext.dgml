@@ -64,7 +64,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequi
 <Node Id = "DronePreflightConfig.Drone" Label="Drone (1)" Name="Drone" Category="Navigation Property" Type="Drone"  Field="" Dependent="" Principal="Drone" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DronePreflightConfig.Pilot" Label="Pilot (1)" Name="Pilot" Category="Navigation Property" Type="User"  Field="" Dependent="" Principal="User" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DronePreflightConfig.Region" Label="Region (1)" Name="Region" Category="Navigation Property" Type="Region"  Field="" Dependent="" Principal="Region" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "DronePreflightConfig.Route" Label="Route (1)" Name="Route" Category="Navigation Property" Type="Route"  Field="" Dependent="" Principal="Route" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DronePreflightConfig.Altitude" Label="Altitude (long?)" Name="Altitude" Category="Property Optional" Type="long?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: altitude" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DronePreflightConfig.DroneId" Label="DroneId (int)" Name="DroneId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: drone_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
@@ -72,8 +71,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequi
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DronePreflightConfig.RegionId" Label="RegionId (int)" Name="RegionId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: region_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "DronePreflightConfig.RouteId" Label="RouteId (int?)" Name="RouteId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: route_id
-Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DronePreflightConfig.Ts" Label="Ts (DateTime)" Name="Ts" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: ts
 Relational:ColumnType: datetime" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAddOrUpdate" />
 <Node Id = "DroneStateLog" Label="DroneStateLog" Name="DroneStateLog" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: DroneStateLogs
@@ -83,7 +80,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequi
 <Node Id = "DroneState.Drone" Label="Drone (1)" Name="Drone" Category="Navigation Property" Type="Drone"  Field="" Dependent="" Principal="Drone" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneState.Pilot" Label="Pilot (1)" Name="Pilot" Category="Navigation Property" Type="User"  Field="" Dependent="" Principal="User" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneState.Region" Label="Region (1)" Name="Region" Category="Navigation Property" Type="Region"  Field="" Dependent="" Principal="Region" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "DroneState.Route" Label="Route (1)" Name="Route" Category="Navigation Property" Type="Route"  Field="" Dependent="" Principal="Route" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneState.Altitude" Label="Altitude (long?)" Name="Altitude" Category="Property Optional" Type="long?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: altitude" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneState.Battery" Label="Battery (float?)" Name="Battery" Category="Property Optional" Type="float?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: battery" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneState.DroneId" Label="DroneId (int)" Name="DroneId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: drone_id
@@ -93,8 +89,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequi
 <Node Id = "DroneState.PilotId" Label="PilotId (int?)" Name="PilotId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: pilot_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneState.RegionId" Label="RegionId (int?)" Name="RegionId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: region_id
-Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "DroneState.RouteId" Label="RouteId (int?)" Name="RouteId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: route_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneState.Status" Label="Status (DroneStatus)" Name="Status" Category="Property Required" Type="DroneStatus" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: status" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneState.Ts" Label="Ts (DateTime)" Name="Ts" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: ts
@@ -109,7 +103,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequi
 <Node Id = "DroneStateLog.Drone" Label="Drone (1)" Name="Drone" Category="Navigation Property" Type="Drone"  Field="" Dependent="" Principal="Drone" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneStateLog.Pilot" Label="Pilot (1)" Name="Pilot" Category="Navigation Property" Type="User"  Field="" Dependent="" Principal="User" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneStateLog.Region" Label="Region (1)" Name="Region" Category="Navigation Property" Type="Region"  Field="" Dependent="" Principal="Region" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "DroneStateLog.Route" Label="Route (1)" Name="Route" Category="Navigation Property" Type="Route"  Field="" Dependent="" Principal="Route" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "DroneStateLog.Altitude" Label="Altitude (long?)" Name="Altitude" Category="Property Optional" Type="long?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: altitude" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneStateLog.Battery" Label="Battery (float?)" Name="Battery" Category="Property Optional" Type="float?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: battery" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneStateLog.DroneId" Label="DroneId (int)" Name="DroneId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: drone_id
@@ -119,8 +112,6 @@ Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequi
 <Node Id = "DroneStateLog.PilotId" Label="PilotId (int?)" Name="PilotId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: pilot_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneStateLog.RegionId" Label="RegionId (int?)" Name="RegionId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: region_id
-Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "DroneStateLog.RouteId" Label="RouteId (int?)" Name="RouteId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: route_id
 Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneStateLog.Status" Label="Status (DroneStatus)" Name="Status" Category="Property Required" Type="DroneStatus" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: status" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "DroneStateLog.Ts" Label="Ts (DateTime)" Name="Ts" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: ts
@@ -163,7 +154,7 @@ Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequi
 <Node Id = "GroundWasteSensorStateLog.MassKg" Label="MassKg (float)" Name="MassKg" Category="Property Required" Type="float" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: mass_kg" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "GroundWasteSensorStateLog.Ts" Label="Ts (DateTime)" Name="Ts" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: ts
 Relational:ColumnType: datetime" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAddOrUpdate" />
-<Node Id = "Route" Label="Route" Name="Route" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Routes
+<Node Id = "User" Label="User" Name="User" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Users
 RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
 <Node Id = "Region.Id" Label="Id (int)" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: id
 Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
@@ -174,19 +165,6 @@ Relational:ColumnType: datetime" IsPrimaryKey="False" IsForeignKey="False" IsReq
 Relational:ColumnType: varchar(500)" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "Region.Name" Label="Name (string)" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: name
 Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "User" Label="User" Name="User" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="Relational:TableName: Users
-RelationshipDiscoveryConvention:NavigationCandidates: System.Collections.Immutable.ImmutableSortedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" Category="EntityType" Group="Expanded" />
-<Node Id = "Route.Id" Label="Id (int)" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: id
-Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
-<Node Id = "Route.Region" Label="Region (1)" Name="Region" Category="Navigation Property" Type="Region"  Field="" Dependent="" Principal="Region" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
-<Node Id = "Route.CreatedTs" Label="CreatedTs (DateTime)" Name="CreatedTs" Category="Property Required" Type="DateTime" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: created_ts
-Relational:ColumnType: datetime" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAddOrUpdate" />
-<Node Id = "Route.GeoJSON" Label="GeoJSON (string)" Name="GeoJSON" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: geojson
-Relational:ColumnType: varchar(500)" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "Route.Name" Label="Name (string)" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: name
-Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
-<Node Id = "Route.RegionId" Label="RegionId (int?)" Name="RegionId" Category="Property Foreign" Type="int?" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: region_id
-Relational:ColumnType: int(11)" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "User" Label="User" Name="User" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="" Category="EntityType" Group="Expanded" />
 <Node Id = "User.Id" Label="Id (int)" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnName: id
 Relational:ColumnType: int(11)" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
@@ -241,28 +219,23 @@ Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" Is
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Drone" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Pilot" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Region" Category="Contains" />
-<Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Route" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Id" Category="Contains" />
 <Link Source="DronePreflightConfig" Target="Drone" From="DronePreflightConfig.DroneId" To="Drone.Id" Name="DronePreflightConfig -> Drone" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DronePreflightConfig" Target="User" From="DronePreflightConfig.PilotId" To="User.Id" Name="DronePreflightConfig -> User" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DronePreflightConfig" Target="Region" From="DronePreflightConfig.RegionId" To="Region.Id" Name="DronePreflightConfig -> Region" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source="DronePreflightConfig" Target="Route" From="DronePreflightConfig.RouteId" To="Route.Id" Name="DronePreflightConfig -> Route" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Altitude" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.DroneId" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.PilotId" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.RegionId" Category="Contains" />
-<Link Source = "DronePreflightConfig" Target="DronePreflightConfig.RouteId" Category="Contains" />
 <Link Source = "DronePreflightConfig" Target="DronePreflightConfig.Ts" Category="Contains" />
 <Link Source = "IModel" Target="DroneStateLog" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Drone" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Pilot" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Region" Category="Contains" />
-<Link Source = "DroneState" Target="DroneState.Route" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Id" Category="Contains" />
 <Link Source="DroneState" Target="Drone" From="DroneState.DroneId" To="Drone.Id" Name="DroneState -> Drone" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DroneState" Target="User" From="DroneState.PilotId" To="User.Id" Name="DroneState -> User" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DroneState" Target="Region" From="DroneState.RegionId" To="Region.Id" Name="DroneState -> Region" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source="DroneState" Target="Route" From="DroneState.RouteId" To="Route.Id" Name="DroneState -> Route" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "DroneState" Target="DroneState.Altitude" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Battery" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.DroneId" Category="Contains" />
@@ -270,7 +243,6 @@ Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" Is
 <Link Source = "DroneState" Target="DroneState.Longitude" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.PilotId" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.RegionId" Category="Contains" />
-<Link Source = "DroneState" Target="DroneState.RouteId" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Status" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.Ts" Category="Contains" />
 <Link Source = "DroneState" Target="DroneState.VelocityX" Category="Contains" />
@@ -280,12 +252,10 @@ Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" Is
 <Link Source = "DroneStateLog" Target="DroneStateLog.Drone" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Pilot" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Region" Category="Contains" />
-<Link Source = "DroneStateLog" Target="DroneStateLog.Route" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Id" Category="Contains" />
 <Link Source="DroneStateLog" Target="Drone" From="DroneStateLog.DroneId" To="Drone.Id" Name="DroneStateLog -> Drone" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DroneStateLog" Target="User" From="DroneStateLog.PilotId" To="User.Id" Name="DroneStateLog -> User" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="DroneStateLog" Target="Region" From="DroneStateLog.RegionId" To="Region.Id" Name="DroneStateLog -> Region" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source="DroneStateLog" Target="Route" From="DroneStateLog.RouteId" To="Route.Id" Name="DroneStateLog -> Route" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Altitude" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Battery" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.DroneId" Category="Contains" />
@@ -293,7 +263,6 @@ Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" Is
 <Link Source = "DroneStateLog" Target="DroneStateLog.Longitude" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.PilotId" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.RegionId" Category="Contains" />
-<Link Source = "DroneStateLog" Target="DroneStateLog.RouteId" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Status" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.Ts" Category="Contains" />
 <Link Source = "DroneStateLog" Target="DroneStateLog.VelocityX" Category="Contains" />
@@ -322,20 +291,12 @@ Relational:ColumnType: varchar(50)" IsPrimaryKey="False" IsForeignKey="False" Is
 <Link Source = "GroundWasteSensorStateLog" Target="GroundWasteSensorStateLog.GroundWasteSensorId" Category="Contains" />
 <Link Source = "GroundWasteSensorStateLog" Target="GroundWasteSensorStateLog.MassKg" Category="Contains" />
 <Link Source = "GroundWasteSensorStateLog" Target="GroundWasteSensorStateLog.Ts" Category="Contains" />
-<Link Source = "IModel" Target="Route" Category="Contains" />
+<Link Source = "IModel" Target="User" Category="Contains" />
 <Link Source = "Region" Target="Region.Id" Category="Contains" />
 <Link Source = "Region" Target="Region.Area" Category="Contains" />
 <Link Source = "Region" Target="Region.CreatedTs" Category="Contains" />
 <Link Source = "Region" Target="Region.GeoJSON" Category="Contains" />
 <Link Source = "Region" Target="Region.Name" Category="Contains" />
-<Link Source = "IModel" Target="User" Category="Contains" />
-<Link Source = "Route" Target="Route.Region" Category="Contains" />
-<Link Source = "Route" Target="Route.Id" Category="Contains" />
-<Link Source="Route" Target="Region" From="Route.RegionId" To="Region.Id" Name="Route -> Region" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
-<Link Source = "Route" Target="Route.CreatedTs" Category="Contains" />
-<Link Source = "Route" Target="Route.GeoJSON" Category="Contains" />
-<Link Source = "Route" Target="Route.Name" Category="Contains" />
-<Link Source = "Route" Target="Route.RegionId" Category="Contains" />
 <Link Source = "IModel" Target="User" Category="Contains" />
 <Link Source = "User" Target="User.Id" Category="Contains" />
 <Link Source = "User" Target="User.CreatedTs" Category="Contains" />

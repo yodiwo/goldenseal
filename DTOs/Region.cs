@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace GoldenSealWebApi.DTOs
 {
     public class RegionViewDTO
@@ -10,7 +12,8 @@ namespace GoldenSealWebApi.DTOs
 
     public class RegionCreateDTO
     {
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
+        [Required] public float Area { get; set; }
         public string GeoJSON { get; set; }
     }
 }

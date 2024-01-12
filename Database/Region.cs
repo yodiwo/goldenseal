@@ -20,5 +20,8 @@ namespace GoldenSealWebApi.Database
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("created_ts", TypeName = "datetime")]
         public DateTime CreatedTs { get; set; }
+
+        [Column("area")]
+        public float Area { get; set; }
     }
 }

@@ -38,7 +38,8 @@ namespace GoldenSealWebApi.Controllers
             await _context.Regions.AddAsync(new Region
             {
                 Name = req.Name,
-                GeoJSON = req.GeoJSON
+                GeoJSON = req.GeoJSON,
+                Area = req.Area
             });
             await _context.SaveChangesAsync();
 

@@ -18,9 +18,6 @@ namespace GoldenSealWebApi.Database
         [Column("mass_kg")]
         public float MassKg { get; set; }
 
-        [Column("rank")]
-        public int Rank { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("ts", TypeName = "datetime")]
         public DateTime Ts { get; set; }

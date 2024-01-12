@@ -16,13 +16,11 @@ namespace GoldenSealWebApi.Libs
                 {
                     GroundWasteSensorId = req.GroundWasteSensorId,
                     MassKg = req.MassKg,
-                    Rank = req.Rank
                 });
             }
             else
             {
                 state.MassKg = req.MassKg;
-                state.Rank = req.Rank;
 
                 context.GroundWasteSensorStates.Update(state);
             }
@@ -30,8 +28,7 @@ namespace GoldenSealWebApi.Libs
             await context.GroundWasteSensorStateLogs.AddAsync(new GroundWasteSensorStateLog
             {
                 GroundWasteSensorId = req.GroundWasteSensorId,
-                MassKg = req.MassKg,
-                Rank = req.Rank
+                MassKg = req.MassKg
             });
 
             await context.SaveChangesAsync();
@@ -68,8 +65,7 @@ namespace GoldenSealWebApi.Libs
                                             Name = x.GroundWasteSensor.Region.Name
                                         }
                                     },
-                                    MassKg = x.MassKg,
-                                    Rank = x.Rank,
+                                    MassKg = x.MassKg
                                 })
                                 .SingleAsync();
         }

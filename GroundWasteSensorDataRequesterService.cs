@@ -74,7 +74,6 @@ namespace GoldenSealWebApi
                                         {
                                             GroundWasteSensorId = validSensorRefIds[datum.id.ToString()],
                                             MassKg = mass,
-                                            Rank = datum.rank // TODO: remove
                                         };
                                     }
                                 }

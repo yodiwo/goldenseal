@@ -27,13 +27,11 @@ namespace GoldenSealWebApi.DTOs
     {
         public int GroundWasteSensorId { get; set; }
         public float MassKg { get; set; }
-        public int Rank { get; set; }
     }
 
     public class GroundWasteSensorStateViewDTO
     {
         public GroundWasteSensorViewDTO GroundWasteSensor { get; set; }
         public float MassKg { get; set; }
-        public int Rank { get; set; }
     }
 }

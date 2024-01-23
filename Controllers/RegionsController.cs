@@ -63,12 +63,16 @@ namespace GoldenSealWebApi.Controllers
         {
             var wastes = await Libs.Drone.GetDetectedWasteAsync(_context, req);
 
+            req.WasteType = null;
+            var allWastes = await Libs.Drone.GetDetectedWasteAsync(_context, req);
+
             var wastesPerRegion = wastes.GroupBy(x => x.Region.Id);
 
             return wastesPerRegion.Select(wastes => new RegionMetricsViewDTO
             {
                 Region = wastes.First().Region,
                 WastesNumber = wastes.Count(),
+                AllWastesNumber = allWastes.Count(),
                 WastesArea = wastes.Sum(y => y.WasteArea ?? 0)
             }).ToList();
         }

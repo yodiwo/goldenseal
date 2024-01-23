@@ -23,7 +23,10 @@ namespace GoldenSealWebApi.DTOs
         public RegionViewDTO Region { get; set; }
         public int? WastesNumber { get; set; }
         public float? WastesArea { get; set; }
+        public int? AllWastesNumber { get; set; }
+        public float? WastesAbundanceIndex => AllWastesNumber > 0 ? 100 * WastesNumber / AllWastesNumber : null;
+        public float? WastesNumberPerArea => Region.Area > 0 ? WastesNumber / Region.Area : null;
         public float? WastesAreaCoveragePercentage => Region.Area > 0 ? 100 * WastesArea / Region.Area : null;
-        public float? WastesPer100SquareMeters => Region.Area > 0 ? 100 * WastesNumber / Region.Area : null;
+        public float? WastesNumberPer100SquareMeters => Region.Area > 0 ? 100 * WastesNumber / Region.Area : null;
     }
 }

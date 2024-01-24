@@ -17,12 +17,22 @@ namespace GoldenSealWebApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieve the available ground waste sensors.
+        /// </summary>
+        /// <response code="200">Ground waste sensors retrieved</response>
+        [ProducesResponseType(typeof(IEnumerable<GroundWasteSensorViewDTO>), 200)]
         [HttpGet]
         public async Task<IEnumerable<GroundWasteSensorViewDTO>> Get()
         {
             return await Libs.GroundWasteSensor.GetAsync(_context);
         }
 
+        /// <summary>
+        /// Cerate a ground waste sensor.
+        /// </summary>
+        /// <response code="200">Ground waste sensor created</response>
+        [ProducesResponseType(200)]
         [HttpPost]
         public async Task<IActionResult> Add(GroundWasteSensorCreateDTO req)
         {
@@ -38,6 +48,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Delete a ground waste sensor.
+        /// </summary>
+        /// <response code="200">Ground waste sensor deleted</response>
+        [ProducesResponseType(200)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, string refId)
         {
@@ -46,6 +61,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Retrieves the latest state of a ground waste sensor.
+        /// </summary>
+        /// <response code="200">State retrieved</response>
+        [ProducesResponseType(200)]
         [HttpGet("state")]
         public async Task<GroundWasteSensorStateViewDTO> State(int? id, string? refId)
         {

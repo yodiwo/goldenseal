@@ -18,6 +18,11 @@ namespace GoldenSealWebApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieve the available regions.
+        /// </summary>
+        /// <response code="200">Regions retrieved</response>
+        [ProducesResponseType(typeof(IEnumerable<RegionViewDTO>), 200)]
         [HttpGet]
         public async Task<IEnumerable<RegionViewDTO>> Get()
         {
@@ -33,6 +38,11 @@ namespace GoldenSealWebApi.Controllers
                                  .ToListAsync();
         }
 
+        /// <summary>
+        /// Create a new region.
+        /// </summary>
+        /// <response code="200">Region created</response>
+        [ProducesResponseType(200)]
         [HttpPost]
         public async Task<IActionResult> Add(RegionCreateDTO req)
         {
@@ -47,6 +57,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Delete a region.
+        /// </summary>
+        /// <response code="200">Region deleted</response>
+        [ProducesResponseType(200)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -58,6 +73,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Retrieve region metrics.
+        /// </summary>
+        /// <response code="200">Metrics retrieved</response>
+        [ProducesResponseType(typeof(IEnumerable<RegionMetricsViewDTO>), 200)]
         [HttpGet("metrics")]
         public async Task<IEnumerable<RegionMetricsViewDTO>> Get([FromQuery] DroneDetectedWasteLogsGetDTO req)
         {

@@ -18,12 +18,22 @@ namespace GoldenSealWebApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieves the available drones.
+        /// </summary>
+        /// <response code="200">Drones retrieved</response>
+        [ProducesResponseType(typeof(IEnumerable<DroneViewDTO>), 200)]
         [HttpGet]
         public async Task<IEnumerable<DroneViewDTO>> Get()
         {
             return await Libs.Drone.GetAsync(_context);
         }
 
+        /// <summary>
+        /// Create a new drone.
+        /// </summary>
+        /// <response code="200">Drone created</response>
+        [ProducesResponseType(200)]
         [HttpPost]
         public async Task<IActionResult> Add(DroneCreateDTO req)
         {
@@ -38,6 +48,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Delete a drone.
+        /// </summary>
+        /// <response code="200">Drone deleted</response>
+        [ProducesResponseType(200)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -46,6 +61,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Set drone's pre-flight configuration.
+        /// </summary>
+        /// <response code="200">Configuration set</response>
+        [ProducesResponseType(200)]
         [HttpPost("preflight-config")]
         public async Task<IActionResult> PreflightConfig(DronePrefllightConfigCreateDTO req)
         {
@@ -54,12 +74,22 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Retrieve drone's latest state.
+        /// </summary>
+        /// <response code="200">State retrieved</response>
+        [ProducesResponseType(typeof(DroneStateViewDTO),200)]
         [HttpGet("state")]
         public async Task<DroneStateViewDTO> State(int id)
         {
             return await Libs.Drone.GetStateAsync(_context, id);
         }
 
+        /// <summary>
+        /// Push drone's image processed data (detected wastes).
+        /// </summary>
+        /// <response code="200">Data pushed</response>
+        [ProducesResponseType(200)]
         [HttpPost("detected-waste")]
         public async Task<IActionResult> DetectedWaste(DroneDetectedWasteCreateDTO req)
         {
@@ -100,6 +130,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Retrieve detected wastes.
+        /// </summary>
+        /// <response code="200">Data pushed</response>
+        [ProducesResponseType(typeof(List<DroneDetectedWasteLogViewDTO>), 200)]
         [HttpGet("detected-wastes")]
         public async Task<List<DroneDetectedWasteLogViewDTO>> DetectedWastes([FromQuery] DroneDetectedWasteLogsGetDTO req) 
         {

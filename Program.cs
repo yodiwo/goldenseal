@@ -2,6 +2,8 @@ using GoldenSealWebApi;
 using GoldenSealWebApi.Database;
 using GoldenSealWebApi.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Reflection;
 using static GoldenSealWebApi.Middleware.ApiKeyMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,12 @@ builder.Services.AddDbContext<DBContext>(opt => opt.UseMySql(dbConnectionString,
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(config =>
+builder.Services.AddSwaggerGen(options =>
 {
-    config.OperationFilter<MyHeaderFilter>();
+    options.OperationFilter<MyHeaderFilter>();
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 builder.Services.AddHostedService<DroneStateRequesterService>();
@@ -33,10 +38,6 @@ app.UseSwaggerUI();
 
 // middleware
 app.UseMiddleware<ApiKeyMiddleware>();
-
-// Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

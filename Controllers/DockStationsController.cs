@@ -18,6 +18,11 @@ namespace GoldenSealWebApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieves the available dock stations.
+        /// </summary>
+        /// <response code="200">Dock stations retrieved</response>
+        [ProducesResponseType(typeof(IEnumerable<DockStationViewDTO>), 200)]
         [HttpGet]
         public async Task<IEnumerable<DockStationViewDTO>> Get()
         {
@@ -32,6 +37,11 @@ namespace GoldenSealWebApi.Controllers
                                  .ToListAsync();
         }
 
+        /// <summary>
+        /// Create a new dock station.
+        /// </summary>
+        /// <response code="200">Dock station created</response>
+        [ProducesResponseType(200)]
         [HttpPost]
         public async Task<IActionResult> Add(DockStationCreateDTO req)
         {
@@ -45,6 +55,11 @@ namespace GoldenSealWebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Delete a dock station.
+        /// </summary>
+        /// <response code="200">Dock station deleted</response>
+        [ProducesResponseType(200)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

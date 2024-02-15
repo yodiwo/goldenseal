@@ -1,8 +1,8 @@
 using GoldenSealWebApi;
 using GoldenSealWebApi.Database;
+using GoldenSealWebApi.DbContentMigrator;
 using GoldenSealWebApi.Middleware;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System.Reflection;
 using static GoldenSealWebApi.Middleware.ApiKeyMiddleware;
 
@@ -30,6 +30,8 @@ builder.Services.AddHostedService<GroundWasteSensorDataRequesterService>();
 
 builder.Services.AddTransient<IApiKeyValidator, ApiKeyValidator>();
 
+builder.Services.AddScoped<IDbContentMigrator, DbContentMigrator>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,4 +47,18 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// db content migrations
+var applyDbContentMigrations = builder.Configuration.GetValue<bool>("ApplyDbContentMigrations");
+if (applyDbContentMigrations)
+	MigrateDbContent();
+
 app.Run();
+
+
+
+void MigrateDbContent() 
+{
+	using var scope = app.Services.CreateScope();
+	var dbContentMigrator = scope.ServiceProvider.GetRequiredService<IDbContentMigrator>();
+	dbContentMigrator.Apply();
+}
